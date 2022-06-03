@@ -15,7 +15,8 @@ namespace Booking.com.Views
             ResortController resortController = new ResortController();
 
             repResort.DataSource = resortController.GetResorts();
-            repResort.DataBind();            
+            repResort.DataBind();  
+                       
         }
     }
 }

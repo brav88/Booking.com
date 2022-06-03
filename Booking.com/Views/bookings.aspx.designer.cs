@@ -11,7 +11,7 @@ namespace Booking.com.Views
 {
 
 
-    public partial class resorts
+    public partial class bookings
     {
 
         /// <summary>
@@ -33,12 +33,12 @@ namespace Booking.com.Views
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// repResort control.
+        /// repBooking control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repResort;
+        protected global::System.Web.UI.WebControls.Repeater repBooking;
     }
 }
