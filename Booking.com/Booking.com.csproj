@@ -67,6 +67,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\Scripts\CreateTableResort.sql" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
     <Content Include="Images\3.jpg" />
@@ -79,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ResortController.cs" />
+    <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="Model\Booking.cs" />
     <Compile Include="Model\Resort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
