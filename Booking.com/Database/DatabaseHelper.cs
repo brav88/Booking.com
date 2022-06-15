@@ -9,7 +9,7 @@ namespace Booking.com.Database
 {
     public class DatabaseHelper
     {
-        const string server = @"LAP-BSANDI\MSSQLSERVER15";
+        const string server = @"DESKTOP-FCN7H8J";
         const string database = "Booking";
         private static string connectionString = string.Format("Data Source={0};Initial Catalog={1};Integrated Security=True", server, database);
 
