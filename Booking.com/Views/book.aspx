@@ -67,7 +67,7 @@
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col">
-                                    <h5 class="card-title">$ 125 per nigth</h5>
+                                    <h5 class="card-title">$ <label id="lblBookingCost" runat="server"></label> per nigth</h5>
                                 </div>
                                 <div class="col">
                                     <h6 class="card-subtitle" style="float: right">4.95 * 97 reviews</h6>
@@ -78,24 +78,24 @@
                                 <div class="col">
                                     Checkin
                                     <br />
-                                    <input type="date" class="form-control" id="dtCheckin" />
+                                    <input type="date" runat="server" class="form-control" id="dtCheckin" onchange="RangeCalculation()" />
                                 </div>
                                 <div class="col">
                                     Check out
                                     <br />
-                                    <input type="date" class="form-control" id="dtCheckout" />
+                                    <input type="date" runat="server" class="form-control" id="dtCheckout" onchange="RangeCalculation()" />
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
                                     Adults
                                     <br />
-                                    <input type="number" class="form-control" id="intAdults" />
+                                    <input runat="server" type="number" class="form-control" id="intAdults" min="1" max="4" onchange="VisitorsCalculation()" />
                                 </div>
                                 <div class="col">
                                     Kids
                                     <br />
-                                    <input type="number" class="form-control" id="intKids" />
+                                    <input runat="server" type="number" min="0" max="3" class="form-control" id="intKids" />
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -105,10 +105,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    $125 per 5 nights
+                                    $<label id="BookingCostPerNight" runat="server"></label> per <label id="intNights" runat="server"></label> nights
                                 </div>
                                 <div class="col">
-                                    $1750
+                                    $<label id="BookingCostDetail" runat="server"></label>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -133,7 +133,7 @@
                                     <strong>Total</strong>
                                 </div>
                                 <div class="col">
-                                    $1780
+                                    $<label id="BookingCostTotal" runat="server"></label>
                                 </div>
                             </div>
                             <hr />
@@ -143,6 +143,55 @@
                                 </div>
                             </div>
                         </div>
+                        <script type="text/javascript">
+
+                            function CostCalculation() {                                
+                                const BookingCostDetail = document.querySelector("#BookingCostDetail");
+                                const BookingCostPerNight = document.querySelector("#BookingCostPerNight");
+                                const intNights = document.querySelector("#intNights");
+                                const BookingCostTotal = document.querySelector("#BookingCostTotal");
+
+                                BookingCostDetail.innerText = Math.round(parseFloat(BookingCostPerNight.innerText * intNights.innerText) * 100) / 100;
+                                BookingCostTotal.innerText = Math.round(parseFloat((BookingCostPerNight.innerText * intNights.innerText) + 30) * 100) / 100;
+                            }
+
+                            function VisitorsCalculation() {                                
+                                const intAdults = document.querySelector("#intAdults");
+                                const BookingCostPerNight = document.querySelector("#BookingCostPerNight");
+                                const costPerNight = (document.querySelector("#lblBookingCost").innerText);
+
+                                if (intAdults.value > 2) {
+                                    var tax = (costPerNight * 0.13);
+                                    BookingCostPerNight.innerText = parseFloat(costPerNight) + tax;
+                                }
+                                else {
+                                    BookingCostPerNight.innerText = costPerNight;
+                                }
+
+                                debugger;
+
+                                CostCalculation();
+                            }
+
+                            function RangeCalculation() {
+                                const intNights = document.querySelector("#intNights");
+                                const dtCheckin = new Date(document.querySelector("#dtCheckin").value);
+                                const dtCheckout = new Date(document.querySelector("#dtCheckout").value);
+
+                                var range = Math.ceil((dtCheckout.getTime() - dtCheckin.getTime()) / (86400000));                                
+
+                                if (dtCheckout > dtCheckin) {
+                                    if (range > 0) {
+                                        intNights.innerText = range;
+
+                                        CostCalculation();
+                                    }
+                                }
+                                else {
+                                    alert('Fecha llegada no puede ser mas alta que la fecha salida.');
+                                }                                
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
