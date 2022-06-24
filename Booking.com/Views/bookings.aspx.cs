@@ -1,4 +1,5 @@
 ﻿using Booking.com.Controllers;
+using Booking.com.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,19 @@ namespace Booking.com.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            BookingController bookingController = new BookingController();
+            User user = (User)Session["User"];
 
-            repBooking.DataSource = bookingController.GetBookings();
-            repBooking.DataBind();
+            if (user != null)
+            {
+                BookingController bookingController = new BookingController();
+
+                repBooking.DataSource = bookingController.GetBookings();
+                repBooking.DataBind();
+            }
+            else
+            {
+                Response.Redirect("resorts.aspx?user=nosession");
+            }
         }
     }
 }

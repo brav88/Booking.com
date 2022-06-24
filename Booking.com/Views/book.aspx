@@ -24,22 +24,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="resorts.aspx">Resorts</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </li>
                         </ul>
                         <form class="d-flex">
                             <input class="form-control me-sm-2" type="text" placeholder="Search">
@@ -63,7 +47,7 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
-                    <div class="card m-2" style="width: 30rem">
+                    <div class="card m-2" style="width: 30rem">                      
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col">

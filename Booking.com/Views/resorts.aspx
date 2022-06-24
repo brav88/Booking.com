@@ -4,6 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet"
         id="theme_link"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.2/lux/bootstrap.min.css" />
@@ -28,17 +31,7 @@
                                 <a class="nav-link" href="bookings.aspx">Bookings</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
+                                <a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Login</a>
                             </li>
                         </ul>
                         <form class="d-flex">
@@ -48,17 +41,8 @@
                     </div>
                 </div>
             </nav>
-            <%--Off Canva--%>
-            <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    ...
-                </div>
+            <div id="divAlert" runat="server" class="alert alert-dark" role="alert" hidden="hidden">
             </div>
-            <%--Off Canva--%>
             <div class="container">
                 <asp:Repeater ID="repResort" runat="server">
                     <HeaderTemplate>
@@ -79,6 +63,35 @@
                         </div>
                     </FooterTemplate>
                 </asp:Repeater>
+            </div>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel">Log in</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="card" style="border-radius: 15px;">
+                        <div runat="server" id="cardLogin" class="card-body">
+                            <div class="form-floating mb-3">
+                                <input runat="server" type="email" class="form-control" id="email" placeholder="name@example.com" />
+                                <label for="floatingInput">Email address</label>
+                            </div>
+                            <div class="form-floating">
+                                <input runat="server" type="password" class="form-control" id="password" placeholder="Password" />
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <hr />
+                            <button id="btnLogin" runat="server" class="btn btn-primary" style="float: right" onserverclick="Login_Click">Login</button>
+                        </div>
+
+                        <div runat="server" id="cardLogout" class="card-body" hidden="hidden">
+                            <div class="form-floating">                                
+                                <label runat="server" id="lblUser"></label>
+                            </div>
+                            <button id="btnLogout" runat="server" class="btn btn-primary" style="float: right" onserverclick="Logout_Click">LogOut</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

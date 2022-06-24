@@ -13,24 +13,33 @@ namespace Booking.com.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int resortId = Convert.ToInt16(Request.QueryString["resortId"].ToString());
+            User user = (User)Session["User"];
 
-            ResortController resortController = new ResortController();
+            if(user != null)
+            {
+                int resortId = Convert.ToInt16(Request.QueryString["resortId"].ToString());
 
-            List<Resort> resortFound = resortController.GetResort(resortId);
+                ResortController resortController = new ResortController();
 
-            lblBookingCost.InnerText = resortFound[0].Price.ToString();
-            dtCheckin.Value = DateTime.Now.AddDays(15).ToString("yyyy-MM-dd");
-            dtCheckout.Value = DateTime.Now.AddDays(19).ToString("yyyy-MM-dd");
-            intAdults.Value = "2";
-            intKids.Value = "0";
-            intNights.InnerText = "4";
-            BookingCostPerNight.InnerText = resortFound[0].Price.ToString();
-            BookingCostDetail.InnerText = Convert.ToDecimal(resortFound[0].Price * 4).ToString();
-            BookingCostTotal.InnerText = Convert.ToDecimal((resortFound[0].Price * 4) + 30).ToString();
+                List<Resort> resortFound = resortController.GetResort(resortId);
 
-            repBookResort.DataSource = resortFound;
-            repBookResort.DataBind();
+                lblBookingCost.InnerText = resortFound[0].Price.ToString();
+                dtCheckin.Value = DateTime.Now.AddDays(15).ToString("yyyy-MM-dd");
+                dtCheckout.Value = DateTime.Now.AddDays(19).ToString("yyyy-MM-dd");
+                intAdults.Value = "2";
+                intKids.Value = "0";
+                intNights.InnerText = "4";
+                BookingCostPerNight.InnerText = resortFound[0].Price.ToString();
+                BookingCostDetail.InnerText = Convert.ToDecimal(resortFound[0].Price * 4).ToString();
+                BookingCostTotal.InnerText = Convert.ToDecimal((resortFound[0].Price * 4) + 30).ToString();
+
+                repBookResort.DataSource = resortFound;
+                repBookResort.DataBind();
+            }
+            else
+            {
+                Response.Redirect("resorts.aspx?user=nosession");
+            }            
         }
     }
 }
