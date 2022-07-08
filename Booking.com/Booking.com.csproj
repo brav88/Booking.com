@@ -69,7 +69,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\Scripts\CreateTableBooking.sql" />
     <Content Include="Database\Scripts\CreateTableResort.sql" />
+    <Content Include="Database\Scripts\spGetResort.sql" />
+    <Content Include="Database\Scripts\spSaveBooking.sql" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
     <Content Include="Images\3.jpg" />

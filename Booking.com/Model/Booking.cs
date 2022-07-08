@@ -6,7 +6,7 @@ using System.Web;
 namespace Booking.com.Model
 {
     public class Booking : Resort
-    {
+    {        
         public int BookingCode { get; set; }
         public string Email { get; set; }
         public string Checkin { get; set; }

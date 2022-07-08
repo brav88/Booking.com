@@ -114,12 +114,21 @@ namespace Booking.com.Views
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl BookingCostDetail;
 
         /// <summary>
-        /// Control BookingCostTotal.
+        /// Control BookingTotalCost.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BookingCostTotal;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BookingTotalCost;
+
+        /// <summary>
+        /// Control btnSaveBook.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSaveBook;
     }
 }

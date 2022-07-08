@@ -117,13 +117,13 @@
                                     <strong>Total</strong>
                                 </div>
                                 <div class="col">
-                                    $<label id="BookingCostTotal" runat="server"></label>
+                                    $<label id="BookingTotalCost" runat="server"></label>
                                 </div>
                             </div>
                             <hr />
                             <div class="row mb-2">
                                 <div class="col">
-                                    <button class="btn btn-primary" style="float: right">Book now!</button>
+                                    <button id="btnSaveBook" runat="server" class="btn btn-primary" style="float: right" onserverclick="btnSaveBook_ServerClick">Book now!</button>
                                 </div>
                             </div>
                         </div>
@@ -133,10 +133,10 @@
                                 const BookingCostDetail = document.querySelector("#BookingCostDetail");
                                 const BookingCostPerNight = document.querySelector("#BookingCostPerNight");
                                 const intNights = document.querySelector("#intNights");
-                                const BookingCostTotal = document.querySelector("#BookingCostTotal");
+                                const BookingTotalCost = document.querySelector("#BookingTotalCost");
 
                                 BookingCostDetail.innerText = Math.round(parseFloat(BookingCostPerNight.innerText * intNights.innerText) * 100) / 100;
-                                BookingCostTotal.innerText = Math.round(parseFloat((BookingCostPerNight.innerText * intNights.innerText) + 30) * 100) / 100;
+                                BookingTotalCost.innerText = Math.round(parseFloat((BookingCostPerNight.innerText * intNights.innerText) + 30) * 100) / 100;
                             }
 
                             function VisitorsCalculation() {                                

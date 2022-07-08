@@ -14,7 +14,7 @@ namespace Booking.com.Controllers
         {
             List<Resort> resorts = new List<Resort>();
 
-            DataTable ds = Database.DatabaseHelper.ExecuteSql("SELECT * FROM Resort");
+            DataTable ds = Database.DatabaseHelper.ExecuteQuery("[dbo].[spGetResorts]", null);            
 
             foreach (DataRow row in ds.Rows)
             {
