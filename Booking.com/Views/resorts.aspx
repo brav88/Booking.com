@@ -73,11 +73,11 @@
                     <div class="card" style="border-radius: 15px;">
                         <div runat="server" id="cardLogin" class="card-body">
                             <div class="form-floating mb-3">
-                                <input runat="server" type="email" class="form-control" id="email" placeholder="name@example.com" />
+                                <input runat="server" type="email" class="form-control" id="email" placeholder="name@example.com" value="brav850@gmail.com"/>
                                 <label for="floatingInput">Email address</label>
                             </div>
                             <div class="form-floating">
-                                <input runat="server" type="password" class="form-control" id="password" placeholder="Password" />
+                                <input runat="server" type="text" class="form-control" id="password" placeholder="Password" value="Abc123$" />
                                 <label for="floatingPassword">Password</label>
                             </div>
                             <hr />

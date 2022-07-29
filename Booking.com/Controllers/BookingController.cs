@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -7,16 +8,6 @@ using m = Booking.com.Model;
 
 namespace Booking.com.Controllers
 {
-    /*
-        1. Crear un store procedure spGetBookings (parametro @Email)
-            a. SELECT a la tabla Booking WHERE por email = @Email
-	
-        2. En el bookingController modificar el metodo GetBookings() para que vaya 
-            a ejecutar spGetBookings de la base de datos. Basarse en 'public List<Resort> GetResorts()'
-
-        3. Probar     
-    */
-
     public class BookingController
     {
         public void SaveBooking(m.Booking booking)
@@ -38,38 +29,48 @@ namespace Booking.com.Controllers
             Database.DatabaseHelper.ExecuteNonQuery("[dbo].[spSaveBooking]", param);
         }
 
-        public List<m.Booking> GetBookings()
+        public List<m.Booking> GetBookings(string email)
         {
             List<m.Booking> bookings = new List<m.Booking>();
 
-            m.Booking booking1 = new m.Booking()
+            List<SqlParameter> param = new List<SqlParameter>()
             {
-                Photo = "Images/1.jpg",
-                Name = "Hotel Arenas Punta Leona",
-                Checkin = "19/05/2023",
-                Checkout = "24/05/2023",
-                Adults = 2,
-                Kids = 0,
-                Nights = 5,
-                BookingTotalCost = 1750
+                new SqlParameter("@Email", email),
             };
 
-            m.Booking booking2 = new m.Booking()
-            {
-                Photo = "Images/2.jpg",
-                Name = "Hotel Riu Palace Guanacaste",
-                Checkin = "19/05/2023",
-                Checkout = "24/05/2023",
-                Adults = 2,
-                Kids = 0,
-                Nights = 5,
-                BookingTotalCost = 1750
-            };
+            DataTable ds = Database.DatabaseHelper.ExecuteQuery("[dbo].[spGetBookings]", param);
 
-            bookings.Add(booking1);
-            bookings.Add(booking2);
+            foreach (DataRow row in ds.Rows)
+            {
+                bookings.Add(new m.Booking()
+                {
+                    Name = Convert.ToString(row["Name"]),
+                    Photo = Convert.ToString(row["Photo"]),
+                    BookingCode = Convert.ToInt16(row["BookingCode"]),
+                    Id = Convert.ToInt16(row["ResortID"]),
+                    Email = Convert.ToString(row["email"]),
+                    Checkin = Convert.ToDateTime(row["Checkin"]).ToString("dd-MM-yyyy"),
+                    Checkout = Convert.ToDateTime(row["Checkout"]).ToString("dd-MM-yyyy"),
+                    Adults = Convert.ToInt16(row["Adults"]),
+                    Kids = Convert.ToInt16(row["Kids"]),
+                    Nights = Convert.ToInt16(row["Nights"]),
+                    BookingCost = Convert.ToDecimal(row["BookingCost"]),
+                    BookingCostPerNight = Convert.ToDecimal(row["BookingCostPerNight"]),
+                    BookingTotalCost = Convert.ToDecimal(row["BookingTotalCost"]),
+                });
+            }
 
             return bookings;
+        }
+
+        public void DeleteBooking(int bookingCode)
+        {
+            List<SqlParameter> param = new List<SqlParameter>()
+            {
+                new SqlParameter("@BookingCode", bookingCode),
+            };
+
+            Database.DatabaseHelper.ExecuteNonQuery("[dbo].[spDeleteBooking]", param);
         }
     }
 }

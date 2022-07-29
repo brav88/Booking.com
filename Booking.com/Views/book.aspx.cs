@@ -70,6 +70,8 @@ namespace Booking.com.Views
                 };
 
                 bookingController.SaveBooking(booking);
+
+                Response.Redirect("bookings.aspx");
             }
             else
             {

@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="bookings.aspx.cs" Inherits="Booking.com.Views.bookings" %>
 
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,6 +13,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="container-fluid">
@@ -23,7 +26,7 @@
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="resorts.aspx">Resorts</a>
-                            </li>                           
+                            </li>
                         </ul>
                         <form class="d-flex">
                             <input class="form-control me-sm-2" type="text" placeholder="Search">
@@ -74,7 +77,7 @@
                                     <hr />
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <button class="btn btn-danger" style="float: left; width: 49%">Cancel</button>
+                                            <button onclick="deleteBooking(<%# Eval("BookingCode")%>)" class="btn btn-danger" style="float: left; width: 49%">Cancel</button>
                                             <button class="btn btn-info" style="float: right; width: 49%">Edit</button>
                                         </div>
                                     </div>
@@ -83,6 +86,15 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
+                <script type="text/javascript">
+
+                    function deleteBooking(bookingCode) {
+
+                        PageMethods.DeleteBooking(bookingCode);
+
+                        window.location.href = "/Views/bookings.aspx";
+                    }
+                </script>
             </div>
         </div>
     </form>

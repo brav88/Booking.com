@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,13 +20,21 @@ namespace Booking.com.Views
             {
                 BookingController bookingController = new BookingController();
 
-                repBooking.DataSource = bookingController.GetBookings();
+                repBooking.DataSource = bookingController.GetBookings(user.Email);
                 repBooking.DataBind();
             }
             else
             {
                 Response.Redirect("resorts.aspx?user=nosession");
             }
+        }
+
+        [WebMethod]
+        public static void DeleteBooking(int bookingCode)
+        {
+            BookingController bookingController = new BookingController();
+
+            bookingController.DeleteBooking(bookingCode);
         }
     }
 }
