@@ -21,7 +21,7 @@ namespace Booking.com.Controllers
                 new SqlParameter("@Adults", booking.Adults),
                 new SqlParameter("@Kids", booking.Kids),
                 new SqlParameter("@Nights", booking.Nights),
-                new SqlParameter("@BookingCost", booking.BookingCost),
+                new SqlParameter("@BookingCost", booking.BookingCostDetail),
                 new SqlParameter("@BookingCostPerNight", booking.BookingCostPerNight),
                 new SqlParameter("@BookingTotalCost", booking.BookingTotalCost),
             };
@@ -29,16 +29,47 @@ namespace Booking.com.Controllers
             Database.DatabaseHelper.ExecuteNonQuery("[dbo].[spSaveBooking]", param);
         }
 
+        public void UpdateBooking(m.Booking booking)
+        {
+            List<SqlParameter> param = new List<SqlParameter>()
+            {
+                new SqlParameter("@BookingCode", booking.BookingCode),
+                new SqlParameter("@Checkin", booking.Checkin),
+                new SqlParameter("@Checkout", booking.Checkout),
+                new SqlParameter("@Adults", booking.Adults),
+                new SqlParameter("@Kids", booking.Kids),
+                new SqlParameter("@Nights", booking.Nights),
+                new SqlParameter("@BookingCost", booking.BookingCostDetail),
+                new SqlParameter("@BookingCostPerNight", booking.BookingCostPerNight),
+                new SqlParameter("@BookingTotalCost", booking.BookingTotalCost),
+            };
+
+            Database.DatabaseHelper.ExecuteNonQuery("[dbo].[spUpdateBooking]", param);
+        }
+
+        public List<m.Booking> GetBooking(int bookingCode)
+        {
+            List<SqlParameter> param = new List<SqlParameter>()
+            {
+                new SqlParameter("@BookingCode", bookingCode),
+            };
+
+            return GetBookingData(Database.DatabaseHelper.ExecuteQuery("[dbo].[spGetBooking]", param));
+        }
+
         public List<m.Booking> GetBookings(string email)
         {
-            List<m.Booking> bookings = new List<m.Booking>();
-
             List<SqlParameter> param = new List<SqlParameter>()
             {
                 new SqlParameter("@Email", email),
             };
 
-            DataTable ds = Database.DatabaseHelper.ExecuteQuery("[dbo].[spGetBookings]", param);
+            return GetBookingData(Database.DatabaseHelper.ExecuteQuery("[dbo].[spGetBookings]", param));
+        }
+
+        public List<m.Booking> GetBookingData(DataTable ds)
+        {
+            List<m.Booking> bookings = new List<m.Booking>();
 
             foreach (DataRow row in ds.Rows)
             {
@@ -54,7 +85,7 @@ namespace Booking.com.Controllers
                     Adults = Convert.ToInt16(row["Adults"]),
                     Kids = Convert.ToInt16(row["Kids"]),
                     Nights = Convert.ToInt16(row["Nights"]),
-                    BookingCost = Convert.ToDecimal(row["BookingCost"]),
+                    BookingCostDetail = Convert.ToDecimal(row["BookingCost"]),
                     BookingCostPerNight = Convert.ToDecimal(row["BookingCostPerNight"]),
                     BookingTotalCost = Convert.ToDecimal(row["BookingTotalCost"]),
                 });

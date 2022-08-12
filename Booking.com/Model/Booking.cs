@@ -14,7 +14,7 @@ namespace Booking.com.Model
         public int Adults { get; set; }
         public int Kids { get; set; }
         public int Nights { get; set; }
-        public decimal BookingCost { get; set; }
+        public decimal BookingCostDetail { get; set; }
         public decimal BookingCostPerNight { get; set; }
         public decimal BookingTotalCost { get; set; }
     }

@@ -77,8 +77,8 @@
                                     <hr />
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <button onclick="deleteBooking(<%# Eval("BookingCode")%>)" class="btn btn-danger" style="float: left; width: 49%">Cancel</button>
-                                            <button class="btn btn-info" style="float: right; width: 49%">Edit</button>
+                                            <button type="button" onclick="deleteBooking(<%# Eval("BookingCode")%>)" class="btn btn-danger" style="float: left; width: 49%">Cancel</button>
+                                            <button type="button" onclick="UpdateBooking(<%# Eval("Id")%>, <%# Eval("BookingCode")%>)" class="btn btn-info" style="float: right; width: 49%">Edit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -87,6 +87,11 @@
                     </asp:Repeater>
                 </div>
                 <script type="text/javascript">
+
+                    function UpdateBooking(resortId, bookingCode) {
+
+                        window.location.href = "/Views/Book.aspx?resortId=" + resortId + "&bookingCode=" + bookingCode, true;
+                    }
 
                     function deleteBooking(bookingCode) {
 

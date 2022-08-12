@@ -55,7 +55,7 @@
                                 <h5 class="card-title"><%# Eval("Name")%></h5>
                                 <p class="card-text"><%# Eval("Description")%></p>
                                 <p class="card-text">$<%# Eval("Price")%> per night</p>
-                                <a href="book.aspx?resortId=<%# Eval("id")%>" class="btn btn-primary">Book this!</a>
+                                <a href="book.aspx?resortId=<%# Eval("id")%>&BookingCode=0" class="btn btn-primary">Book this!</a>
                             </div>
                         </div>
                     </ItemTemplate>
